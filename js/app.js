@@ -97,18 +97,24 @@
     
     if (!input) {
       Logger.error('Input is empty');
-      Logger.open();
+      // Open log panel automatically on error
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
       return;
     }
 
     if (recipe.length === 0) {
       Logger.error('Recipe is empty. Add operations first.');
-      Logger.open();
+      // Open log panel automatically on error
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
       return;
     }
 
     Logger.info('Starting execution...');
-    Logger.open();
+    // Open log panel to show progress
+    if (logPanel) logPanel.classList.add('active');
+    logIsOpen = true;
 
     const startTime = performance.now();
     let result = input;
@@ -175,7 +181,10 @@
 
     if (recipe.length === 0) {
       Logger.error('Recipe is empty. Add operations first.');
-      Logger.open();
+      // Open log panel automatically on error
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
       return;
     }
 
@@ -184,12 +193,18 @@
       const input = inputEl.value;
       if (!input) {
         Logger.error('Input is empty');
-        Logger.open();
+        // Open log panel automatically on error
+        const logPanel = $('log-panel');
+        if (logPanel) logPanel.classList.add('active');
+        logIsOpen = true;
         return;
       }
       outputEl.value = input;
       Logger.info('Starting step-by-step execution...');
-      Logger.open();
+      // Open log panel to show progress
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
     }
 
     if (currentStepIndex >= recipe.length) {
@@ -223,7 +238,7 @@
       currentStepIndex++;
 
       if (currentStepIndex >= recipe.length) {
-        Logger.success('All steps completed!');
+        Logger.success('🎉 All steps completed!');
         setTimeout(() => {
           currentStepIndex = 0;
         }, 2000);
@@ -242,7 +257,10 @@
   function saveRecipe() {
     if (recipe.length === 0) {
       Logger.error('Recipe is empty');
-      Logger.open();
+      // Open log panel automatically on error
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
       return;
     }
 
@@ -251,7 +269,10 @@
       Logger.success('Recipe saved successfully');
     } catch (error) {
       Logger.error('Failed to save recipe: ' + error.message);
-      Logger.open();
+      // Open log panel automatically on error
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
     }
   }
 
@@ -266,7 +287,10 @@
       Logger.success(`Loaded recipe: ${file.name} (${data.length} steps)`);
     } catch (error) {
       Logger.error('Failed to load recipe: ' + error.message);
-      Logger.open();
+      // Open log panel automatically on error
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
     }
   }
 
@@ -280,12 +304,18 @@
     const input = inputEl.value;
     if (!input) {
       Logger.error('Input is empty');
-      Logger.open();
+      // Open log panel automatically on error
+      const logPanel = $('log-panel');
+      if (logPanel) logPanel.classList.add('active');
+      logIsOpen = true;
       return;
     }
 
     Logger.info('Analyzing input...');
-    Logger.open();
+    // Open log panel to show progress
+    const logPanel = $('log-panel');
+    if (logPanel) logPanel.classList.add('active');
+    logIsOpen = true;
 
     const detection = detectInputType(input);
     displayAutoDetect(detection);
@@ -335,7 +365,10 @@
           Logger.success('Text pasted from clipboard');
         } catch (error) {
           Logger.error('Failed to paste: ' + error.message);
-          Logger.open();
+          // Open log panel automatically on error
+          const logPanel = $('log-panel');
+          if (logPanel) logPanel.classList.add('active');
+          logIsOpen = true;
         }
       });
     }
@@ -365,7 +398,10 @@
       copyBtn.addEventListener('click', async () => {
         if (!outputEl.value) {
           Logger.error('Output is empty');
-          Logger.open();
+          // Open log panel automatically on error
+          const logPanel = $('log-panel');
+          if (logPanel) logPanel.classList.add('active');
+          logIsOpen = true;
           return;
         }
         try {
@@ -373,7 +409,10 @@
           Logger.success('Copied to clipboard');
         } catch (error) {
           Logger.error('Failed to copy: ' + error.message);
-          Logger.open();
+          // Open log panel automatically on error
+          const logPanel = $('log-panel');
+          if (logPanel) logPanel.classList.add('active');
+          logIsOpen = true;
         }
       });
     }
@@ -384,7 +423,10 @@
       downloadBtn.addEventListener('click', () => {
         if (!outputEl.value) {
           Logger.error('Output is empty');
-          Logger.open();
+          // Open log panel automatically on error
+          const logPanel = $('log-panel');
+          if (logPanel) logPanel.classList.add('active');
+          logIsOpen = true;
           return;
         }
         try {
@@ -392,7 +434,10 @@
           Logger.success('Output downloaded');
         } catch (error) {
           Logger.error('Failed to download: ' + error.message);
-          Logger.open();
+          // Open log panel automatically on error
+          const logPanel = $('log-panel');
+          if (logPanel) logPanel.classList.add('active');
+          logIsOpen = true;
         }
       });
     }

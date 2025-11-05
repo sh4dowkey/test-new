@@ -20,7 +20,20 @@ const CryptoUtils = (function() {
       await navigator.clipboard.writeText(text || '');
       return true;
     } catch (error) {
-      throw new Error('Failed to copy to clipboard');
+      // Fallback for older browsers
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return true;
+      } catch (e) {
+        throw new Error('Failed to copy to clipboard');
+      }
     }
   }
 
@@ -34,7 +47,9 @@ const CryptoUtils = (function() {
       const a = document.createElement('a');
       a.href = url;
       a.download = filename;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
       throw new Error('Failed to download file');
@@ -50,7 +65,9 @@ const CryptoUtils = (function() {
       const a = document.createElement('a');
       a.href = url;
       a.download = filename;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
       throw new Error('Failed to save JSON');
@@ -239,9 +256,13 @@ const CryptoUtils = (function() {
       if (!step.op) {
         throw new Error(`Step ${i + 1} is missing operation`);
       }
-      const operation = CryptoOperations.get(step.op);
-      if (!operation) {
-        throw new Error(`Step ${i + 1}: Unknown operation "${step.op}"`);
+      
+      // Check if CryptoOperations is available
+      if (typeof CryptoOperations !== 'undefined') {
+        const operation = CryptoOperations.get(step.op);
+        if (!operation) {
+          throw new Error(`Step ${i + 1}: Unknown operation "${step.op}"`);
+        }
       }
     }
 

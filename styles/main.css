@@ -2,35 +2,35 @@
    CryptoSuite - Enhanced Professional Layout
    Operations (Left) | Recipe (Center) | Input/Output (Right)
    ======================================== */
+
 :root {
-  /* Light Blue-Warm Neutral Theme */
-  --color-primary: #5b7ea4;             /* Muted steel blue accent */
-  --color-primary-hover: #4a6d91;       /* Slightly deeper blue */
-  --color-primary-light: #e6edf4;       /* Misty pale blue for highlights */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: #dbeafe;
   
-  --color-secondary: #9fa8b2;           /* Cool neutral gray-blue */
-  --color-secondary-hover: #8c95a0;
+  --color-secondary: #64748b;
+  --color-secondary-hover: #475569;
   
-  --color-success: #6e8b7a;             /* Muted sage green */
-  --color-warning: #c3ae82;             /* Warm beige-gold accent */
-  --color-danger: #a06b6b;              /* Subtle clay-rose red */
-  --color-info: #6f7c8b;                /* Balanced gray-blue info tone */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
   
-  --color-bg-page: #f6f8fa;             /* Clean light ivory-blue base */
-  --color-bg-card: #ffffff;             /* Pure white for panels/cards */
-  --color-bg-secondary: #edf1f5;        /* Soft pale gray-blue for sidebars */
-  --color-bg-hover: #e7ecf2;            /* Slight hover contrast */
+  --color-bg-page: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-secondary: #f1f5f9;
+  --color-bg-hover: #f8fafc;
   
-  --color-border: #d9dee4;
-  --color-border-light: #e7ebf0;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
   
-  --color-text-primary: #2a2f35;        /* Deep gray-blue text */
-  --color-text-secondary: #505862;      /* Mid gray-blue for labels */
-  --color-text-tertiary: #7e8793;       /* Light desaturated gray-blue */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
   
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -40,7 +40,24 @@
   --recipe-width: 400px;
   --header-height: 70px;
   
-  --transition: all 0.25s ease;
+  --transition: all 0.2s ease;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-page: #0f172a;
+    --color-bg-card: #1e293b;
+    --color-bg-secondary: #334155;
+    --color-bg-hover: #475569;
+    
+    --color-border: #334155;
+    --color-border-light: #475569;
+    
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-tertiary: #94a3b8;
+  }
 }
 
 /* ========================================
@@ -61,6 +78,16 @@ html, body {
   background: var(--color-bg-page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile override - allow scrolling */
+@media (max-width: 767px) {
+  html, body {
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
 /* ========================================
